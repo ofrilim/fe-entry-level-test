@@ -1,12 +1,15 @@
 import { emptyItemQuery } from './item.js';
+import { getLiveTodos } from './fetchData.js';
+
+const DATA_URL = 'https://jsonplaceholder.typicode.com/todos';
 
 export default class Store {
 
 	constructor(name, callback) {
 		const localStorage = window.localStorage;
 
-		let liveTodos;
-
+		let liveTodos = getLiveTodos(DATA_URL);
+    
 		this.getLocalStorage = () => {
 			return liveTodos || JSON.parse(localStorage.getItem(name) || '[]');
 		};
@@ -20,8 +23,8 @@ export default class Store {
 		}
 	}
 
-	find(query, callback) {
-		const todos = this.getLocalStorage();
+	async find(query, callback) {
+		const todos = await this.getLocalStorage();
 
 		callback(todos.filter(todo => {
 			for (let k in query) {

@@ -100,6 +100,9 @@ export default class View {
         handler(title);
       }
     });
+
+    const input = document.querySelector('.new-todo');
+    input.focus();
   }
 
   bindRemoveCompleted(handler) {

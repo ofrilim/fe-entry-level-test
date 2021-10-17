@@ -125,14 +125,11 @@ export default class View {
   }
 
   bindEditItemSave(handler) {
-    delegateEvent(this.$todoList, 'li .edit', 'blur', ({ target }) => {
-      if (!target.dataset.iscanceled) {
+    delegateEvent(this.$todoList, 'li .edit', 'keypress', ({ target, keyCode }) => {
+      if (keyCode === ENTER_KEY && !target.dataset.iscanceled) {
         handler(_itemId(target), target.value.trim());
       }
     }, true);
-
-    delegateEvent(this.$todoList, 'li .edit', 'keypress', ({ target, keyCode }) => {
-    });
   }
 
   bindEditItemCancel(handler) {

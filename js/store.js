@@ -3,7 +3,7 @@ import { emptyItemQuery } from './item.js';
 export default class Store {
 
 	constructor(name, callback) {
-		const localStorage = window.sessionStorage;
+		const localStorage = window.localStorage;
 
 		let liveTodos;
 
